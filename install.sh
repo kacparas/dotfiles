@@ -11,6 +11,7 @@ echo "Installing dotfiles from $DOTFILES_DIR"
 
 # Install Homebrew packages
 echo "Installing Homebrew packages..."
+brew install poppler
 brew install --cask obsidian
 
 # Function to create symlink with backup
