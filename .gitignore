@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# Neovim
+nvim/lazy-lock.json
+
+# Tmux plugins and themes (installed via TPM)
+tmux/plugins/
+tmux/themes/
+
+# Local overrides
+*.local
