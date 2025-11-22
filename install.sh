@@ -9,6 +9,10 @@ DOTFILES_DIR="$HOME/repos/dotfiles"
 
 echo "Installing dotfiles from $DOTFILES_DIR"
 
+# Install Homebrew packages
+echo "Installing Homebrew packages..."
+brew install --cask obsidian
+
 # Function to create symlink with backup
 link_file() {
     local src="$1"
