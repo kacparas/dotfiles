@@ -43,6 +43,9 @@ link_file "$DOTFILES_DIR/zsh/.zprofile" "$HOME/.zprofile"
 mkdir -p "$HOME/.claude"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
+# Link MCP config
+link_file "$DOTFILES_DIR/mcp/.mcp.json" "$HOME/.mcp.json"
+
 echo ""
 echo "Dotfiles installed successfully!"
 echo ""
