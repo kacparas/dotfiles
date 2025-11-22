@@ -39,6 +39,10 @@ link_file "$DOTFILES_DIR/sketchybar" "$HOME/.config/sketchybar"
 link_file "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
 link_file "$DOTFILES_DIR/zsh/.zprofile" "$HOME/.zprofile"
 
+# Link Claude config
+mkdir -p "$HOME/.claude"
+link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+
 echo ""
 echo "Dotfiles installed successfully!"
 echo ""
