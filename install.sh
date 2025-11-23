@@ -55,6 +55,20 @@ echo ""
 echo "Dotfiles installed successfully!"
 echo ""
 echo "Next steps:"
-echo "  - Install Homebrew packages (see README)"
 echo "  - Run 'tmux source ~/.config/tmux/tmux.conf' to reload tmux"
 echo "  - Restart terminal for zsh changes"
+echo "  - For new Obsidian vaults, run: setup-obsidian-vault <vault-path>"
+
+# Function to setup Obsidian vault with template config
+setup_obsidian_vault() {
+    local vault_path="$1"
+    if [ -z "$vault_path" ]; then
+        echo "Usage: setup-obsidian-vault <vault-path>"
+        return 1
+    fi
+
+    mkdir -p "$vault_path/.obsidian"
+    cp -r "$DOTFILES_DIR/obsidian-template/.obsidian/"* "$vault_path/.obsidian/"
+    echo "Obsidian config copied to $vault_path"
+    echo "Open vault in Obsidian and install community plugins from the list"
+}
