@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "WebFetch",
+      "WebSearch"
+    ]
+  },
+  "alwaysThinkingEnabled": false
+}
