@@ -9,10 +9,16 @@ vim.g.mapleader = ' '
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- Line centering
+vim.opt.scrolloff = 999
+
 -- Indentation
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
 vim.opt.expandtab = true
+vim.opt.list = true
+vim.opt.listchars = { tab = '→ ', space = '·' }
 
 -- Search options
 vim.opt.ignorecase = true
@@ -22,7 +28,6 @@ vim.opt.hlsearch = false
 -- UI
 vim.opt.termguicolors = true
 vim.opt.signcolumn = 'yes'
-vim.opt.scrolloff = 8
 vim.opt.wrap = false
 
 -- Window splits

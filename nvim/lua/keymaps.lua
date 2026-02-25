@@ -57,15 +57,15 @@ keymap("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
 keymap("n", "<leader>dx", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- REPL keybindings (Iron.nvim)
-keymap("n", "<leader>rs", "<cmd>IronRepl<cr>", { desc = "Start REPL" })
+keymap("n", "<leader>rf", "<cmd>IronRepl<cr>", { desc = "Start REPL" })
 keymap("n", "<leader>rr", "<cmd>IronRestart<cr>", { desc = "Restart REPL" })
 keymap("n", "<leader>ro", "<cmd>IronFocus<cr>", { desc = "Focus REPL" })
 keymap("n", "<leader>rh", "<cmd>IronHide<cr>", { desc = "Hide REPL" })
 
 -- Send code to REPL
-keymap("n", "<leader>rl", function() require("iron.core").send_line() end,   { desc = "Send line to REPL" })
-keymap("v", "<leader>rv", function() require("iron.core").visual_send() end, { desc = "Send selection to REPL" })
-keymap("n", "<leader>rf", function() require("iron.core").send_file() end,   { desc = "Send file to REPL" })
+keymap("n", "<leader>sl", function() require("iron.core").send_line() end,   { desc = "Send line to REPL" })
+keymap("v", "<leader>sv", function() require("iron.core").visual_send() end, { desc = "Send selection to REPL" })
+keymap("n", "<leader>sf", function() require("iron.core").send_file() end,   { desc = "Send file to REPL" })
 
 -- Quick save and quit
 keymap("n", "<leader>w", ":w<CR>", { desc = "Save file" })
@@ -74,7 +74,7 @@ keymap("n", "<leader>q", ":q<CR>", { desc = "Quit" })
 
 -- Venv selector
 keymap("n", "<leader>vs", "<cmd>VenvSelect<cr>", { desc = "Select venv" })
-keymap("n", "<leader>vc", "<cmd>VenvSelectCached<cr>", { desc = "Select cached venv" })
+keymap("n", "<leader>vc", "<cmd>VenvSelectCache<cr>", { desc = "Activate cached venv" })
 
 -- Dashboard
 keymap("n", "<leader>a", "<cmd>Alpha<cr>", { desc = "Open dashboard" })
@@ -95,7 +95,8 @@ end, { desc = "Close buffer, return to dashboard" })
 -- Terminal
 keymap("n", "<leader>tt", "<cmd>terminal<cr>", { desc = "Open terminal" })
 keymap("n", "<leader>tv", "<cmd>vsplit | terminal<cr>", { desc = "Open terminal in vsplit" })
+keymap("n", "<leader>ts", "<cmd>split | terminal<cr>", { desc = "Open terminal in hsplit (below)" })
 
 -- Claude
 keymap("n", "<leader>tc", "<cmd>terminal claude<cr>", { desc = "Open Claude" })
-keymap("n", "<leader>tC", "<cmd>vsplit | terminal claude<cr>", { desc = "Open Claude in split" })
+keymap("n", "<leader>tC", "<cmd>vsplit | terminal claude<cr>", { desc = "Open Claude in vsplit" })

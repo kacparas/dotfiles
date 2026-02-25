@@ -2,6 +2,13 @@
 
 start-at-login = true
 
+exec-on-workspace-change = [
+  '/bin/bash', '-c',
+  '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change AEROSPACE_FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
+
+on-focus-changed = ['exec-and-forget /Users/kasparavicius/repos/dotfiles/sketchybar/plugins/focus_change.sh']
+
 # Normalizations
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true

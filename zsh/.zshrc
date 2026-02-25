@@ -11,6 +11,11 @@ source ~/.config/powerlevel10k/powerlevel10k.zsh-theme
 # bin path
 export PATH="$HOME/.local/bin:$PATH"
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+
 # Python 3.13 configuration
 export PATH="/opt/homebrew/opt/python@3.13/bin:$PATH"
 alias python3="python3.13"

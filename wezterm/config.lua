@@ -6,9 +6,8 @@ config.set_environment_variables = {
 	PATH = '/opt/homebrew/bin:/usr/local/bin:' .. os.getenv('PATH')
 }
 
--- Launch tmux session picker using the module
-local tmux_picker = require('tmux-picker')
-config.default_prog = tmux_picker.get_default_prog()
+-- Attach to existing tmux session or create a new one
+config.default_prog = { '/bin/zsh', '-l', '-c', 'tmux attach || tmux new-session -s main' }
 
 config.default_cursor_style = 'BlinkingBar'
 config.automatically_reload_config = true

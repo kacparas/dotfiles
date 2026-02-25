@@ -11,8 +11,7 @@ echo "Installing dotfiles from $DOTFILES_DIR"
 
 # Install Homebrew packages
 echo "Installing Homebrew packages..."
-brew install poppler
-brew install --cask obsidian
+brew bundle --file="$DOTFILES_DIR/Brewfile"
 
 # Function to create symlink with backup
 link_file() {
@@ -39,6 +38,7 @@ link_file "$DOTFILES_DIR/tmux" "$HOME/.config/tmux"
 link_file "$DOTFILES_DIR/aerospace" "$HOME/.config/aerospace"
 link_file "$DOTFILES_DIR/wezterm" "$HOME/.config/wezterm"
 link_file "$DOTFILES_DIR/sketchybar" "$HOME/.config/sketchybar"
+link_file "$DOTFILES_DIR/yatoro" "$HOME/.config/Yatoro"
 
 # Link zsh configs
 link_file "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"

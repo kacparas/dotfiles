@@ -69,7 +69,7 @@ require("lazy").setup({
       require("nvim-treesitter.configs").setup({
         ensure_installed = { "python", "lua", "markdown" },
         highlight = { enable = true },
-        indent = { enable = true },
+        indent = { enable = true, disable = { "python" } },
       })
     end,
   },
@@ -85,7 +85,10 @@ require("lazy").setup({
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { "pyright" },
+        ensure_installed = {
+          "pyright",
+          "ruff"
+        },
       })
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -106,7 +109,15 @@ require("lazy").setup({
         capabilities = capabilities,
       }
 
+      vim.lsp.config.ruff = {
+        cmd = { "ruff", "server" },
+        filetypes = { "python" },
+        root_markers = { "pyproject.toml", "ruff.toml", ".git" },
+        capabilities = capabilities,
+      }
+
       vim.lsp.enable("pyright")
+      vim.lsp.enable("ruff")
     end,
   },
 
@@ -138,10 +149,20 @@ require("lazy").setup({
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "buffer" },
           { name = "path" },
         }),
-      })
+        sorting = {
+           comparators = {
+                cmp.config.compare.exact,
+                cmp.config.compare.locality,
+                cmp.config.compare.recently_used,
+                cmp.config.compare.score,
+                cmp.config.compare.kind,
+                cmp.config.compare.length,
+                cmp.config.compare.order,
+              },
+            },
+        })
     end,
   },
 
@@ -181,29 +202,16 @@ require("lazy").setup({
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      -- Function to get current session name
-      local function session_name()
-        local Path = require("plenary.path")
-        local cwd = vim.fn.getcwd()
-        local named_sessions_base = tostring(Path:new(vim.fn.stdpath("data"), "named_sessions"))
-
-        -- Check if we're in a named session directory
-        if cwd:find(named_sessions_base, 1, true) then
-          -- Extract session name from path
-          return cwd:match(named_sessions_base .. "/([^/]+)")
-        end
-        return ""
-      end
-
       require("lualine").setup({
         options = {
           theme = "nord",
+          globalstatus = true,
         },
         sections = {
           lualine_a = { "mode" },
           lualine_b = { "branch", "diff", "diagnostics" },
           lualine_c = { "filename" },
-          lualine_x = { session_name, "encoding", "fileformat", "filetype" },
+          lualine_x = { "venv-selector", "encoding", "fileformat", "filetype" },
           lualine_y = { "progress" },
           lualine_z = { "location" },
         },
@@ -311,34 +319,25 @@ require("lazy").setup({
     end,
   },
 
+  -- Formatter
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      format_on_save = { timeout_ms = 500 },
+      formatters_by_ft = {
+        python = { "ruff_format" },
+      },
+    },
+  },
+
   -- Venv selector for Python
   {
     "linux-cultist/venv-selector.nvim",
     dependencies = {
-      "neovim/nvim-lspconfig",
       "nvim-telescope/telescope.nvim",
     },
-    config = function()
-      require("venv-selector").setup({
-        name = { "venv", ".venv", "env", ".env" },
-        auto_refresh = true,
-      })
-
-      -- Auto-activate venv when entering a directory with one
-      vim.api.nvim_create_autocmd("DirChanged", {
-        pattern = "*",
-        callback = function()
-          local venv_path = vim.fn.getcwd() .. "/venv"
-          local dot_venv_path = vim.fn.getcwd() .. "/.venv"
-          if vim.fn.isdirectory(venv_path) == 1 or vim.fn.isdirectory(dot_venv_path) == 1 then
-            vim.defer_fn(function()
-              vim.cmd("VenvSelectCached")
-            end, 100)
-          end
-        end,
-      })
-    end,
-    event = "VeryLazy",
+    ft = "python",
+    opts = {},
   },
 
 })
