@@ -7,7 +7,7 @@ config.set_environment_variables = {
 }
 
 -- Attach to existing tmux session or create a new one
-config.default_prog = { '/bin/zsh', '-l', '-c', 'tmux attach || tmux new-session -s main' }
+config.default_prog = { '/bin/zsh', '-l', '-c', 'tmux attach -t main || tmux new-session -s main; exec /bin/zsh -l' }
 
 config.default_cursor_style = 'BlinkingBar'
 config.automatically_reload_config = true
