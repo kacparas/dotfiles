@@ -8,41 +8,31 @@ Personal configuration files for macOS development environment.
 - **tmux** - Tmux with Nord theme and TPM plugins
 - **aerospace** - Tiling window manager
 - **wezterm** - Terminal emulator
-- **sketchybar** - macOS status bar
+- **yatoro** - Apple Music TUI
 - **zsh** - Shell configuration with Powerlevel10k
 
 ## Installation
 
 ### Prerequisites
 
-Install these via Homebrew:
+Install Homebrew, then run:
 
 ```bash
-brew install neovim tmux git
-brew install --cask wezterm
-brew install nikitabobko/tap/aerospace
-brew tap FelixKratz/formulae && brew install sketchybar
-```
-
-### Setup
-
-1. Clone the repository:
-```bash
-git clone https://github.com/YOUR_USERNAME/dotfiles.git ~/repos/dotfiles
-```
-
-2. Run the install script:
-```bash
+git clone https://github.com/kacparas/dotfiles.git ~/repos/dotfiles
 cd ~/repos/dotfiles
 ./install.sh
 ```
 
-3. Install tmux plugins:
+`install.sh` will run `brew bundle` to install all packages from the Brewfile, then create symlinks for all configs.
+
+### Post-install
+
+1. Install tmux plugins:
 ```bash
 # Start tmux and press prefix + I (Ctrl-b I)
 ```
 
-4. Install Neovim plugins:
+2. Install Neovim plugins:
 ```bash
 nvim  # Lazy.nvim will auto-install plugins on first launch
 ```
@@ -55,7 +45,8 @@ nvim  # Lazy.nvim will auto-install plugins on first launch
 - `<leader>ff` - Find files
 - `<leader>fg` - Live grep
 - `<leader>e` - Toggle file explorer
-- `<leader>rs` - Start Python REPL
+- `<leader>rf` - Start Python REPL
+- `<leader>sl` - Send line to REPL
 - `<leader>vs` - Select Python venv
 
 ### Tmux
