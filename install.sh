@@ -37,7 +37,6 @@ link_file "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 link_file "$DOTFILES_DIR/tmux" "$HOME/.config/tmux"
 link_file "$DOTFILES_DIR/aerospace" "$HOME/.config/aerospace"
 link_file "$DOTFILES_DIR/wezterm" "$HOME/.config/wezterm"
-link_file "$DOTFILES_DIR/sketchybar" "$HOME/.config/sketchybar"
 link_file "$DOTFILES_DIR/yatoro" "$HOME/.config/Yatoro"
 
 # Link zsh configs
