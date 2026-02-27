@@ -74,13 +74,26 @@ require("lazy").setup({
     end,
   },
 
+-- Autocompletion
+  {
+    "ms-jpq/coq_nvim",
+    branch = "coq",
+    dependencies = {
+      { "ms-jpq/coq.artifacts", branch = "artifacts" },
+    },
+    build = ":COQdeps",
+    init = function()
+      vim.g.coq_settings = { auto_start = "shut-up" }
+    end,
+  },
+
 -- LSP Configuration
   {
     "neovim/nvim-lspconfig",
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      "hrsh7th/cmp-nvim-lsp",
+      "ms-jpq/coq_nvim",
     },
     config = function()
       require("mason").setup()
@@ -93,7 +106,7 @@ require("lazy").setup({
         },
       })
 
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local capabilities = require("coq").lsp_ensure_capabilities({}).capabilities
 
       -- Use the new vim.lsp.config API (Neovim 0.11+)
       vim.lsp.config.pyright = {
@@ -143,51 +156,6 @@ require("lazy").setup({
       vim.lsp.enable("ruff")
       vim.lsp.enable("sourcekit")
       vim.lsp.enable("lua_ls")
-    end,
-  },
-
-  -- Autocompletion
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-    },
-    config = function()
-      local cmp = require("cmp")
-
-      cmp.setup({
-        mapping = cmp.mapping.preset.insert({
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = false }),
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-        }),
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "path" },
-        }),
-        sorting = {
-           comparators = {
-                cmp.config.compare.exact,
-                cmp.config.compare.locality,
-                cmp.config.compare.recently_used,
-                cmp.config.compare.score,
-                cmp.config.compare.kind,
-                cmp.config.compare.length,
-                cmp.config.compare.order,
-              },
-            },
-        })
     end,
   },
 
