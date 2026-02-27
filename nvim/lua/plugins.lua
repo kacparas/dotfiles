@@ -101,7 +101,7 @@ require("lazy").setup({
         ensure_installed = {
           "pyright",
           "ruff",
-          "lua-language-server",
+          "lua_ls",
           "stylua"
         },
       })
