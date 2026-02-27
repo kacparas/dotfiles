@@ -33,5 +33,12 @@ alias rm='trash'
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# git
+autoload -Uz compinit
+compinit
+
+# Case-insensitive tab completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z} m:{A-Z}={a-z}'
+
 # Powerlevel10k config
 [[ ! -f ~/.config/powerlevel10k/p10k.zsh ]] || source ~/.config/powerlevel10k/p10k.zsh

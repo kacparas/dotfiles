@@ -1,3 +1,6 @@
+logging:
+  logLevel: trace
+
 ui:
   frameDelay: 5000000
 

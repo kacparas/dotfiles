@@ -23,6 +23,8 @@ keymap("n", "<leader>ff", function()
       "Music/.*",
       "Movies/.*",
       "Downloads/.*",
+      "%.local/.*",
+      "%.cache/.*"
     }
   })
 end, { desc = "Find files (current dir)" })
@@ -32,15 +34,24 @@ keymap("n", "<leader>fh", function()
     cwd = vim.fn.expand('~'), 
     hidden = true,
     file_ignore_patterns = {
-      "Library",
-      "Photos",
-      "Music",
-      "Movies",
-      ".local",
-      ".cache",
-      "venvs",
-      "site%-packages",
-      "Zotero"
+      "Library/.*",
+      "Photos/.*",
+      "Pictures/.*",
+      "Music/.*",
+      "Movies/.*",
+      "Documents/.*",
+      "%.local/.*",
+      "%.cache/.*",
+      "venv/.*",
+      "site%-packages/.*",
+      "Zotero/.*",
+      "%.claude/.*",
+      "%.fzf/.*",
+      "%.docker/.*",
+      "%.git/.*",
+      "%.pyenv/.*",
+      "%.npm/.*",
+      "%.nextflow/.*"
     }
   })
 end, { desc = "Find files from home" })

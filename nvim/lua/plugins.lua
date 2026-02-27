@@ -15,7 +15,7 @@ require("lazy").setup({
       vim.g.nord_borders = false
       vim.g.nord_disable_background = false
       vim.g.nord_italic = false
-      
+
       -- Load colorscheme
       require('nord').set()
 
@@ -87,7 +87,9 @@ require("lazy").setup({
       require("mason-lspconfig").setup({
         ensure_installed = {
           "pyright",
-          "ruff"
+          "ruff",
+          "lua-language-server",
+          "stylua"
         },
       })
 
@@ -109,15 +111,38 @@ require("lazy").setup({
         capabilities = capabilities,
       }
 
+      vim.lsp.config.lua_ls = {
+        cmd = { "lua-language-server" },
+        filetypes = { "lua" },
+        root_markers = { ".luarc.json", ".git" },
+        settings = {
+          Lua = {
+            runtime = { version = "LuaJIT" },
+            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+            diagnostics = { globals = { "vim" } },
+          }
+        },
+        capabilities = capabilities
+      }
+
       vim.lsp.config.ruff = {
-        cmd = { "ruff", "server" },
+        cmd = { "ruff", 'server' },
         filetypes = { "python" },
         root_markers = { "pyproject.toml", "ruff.toml", ".git" },
         capabilities = capabilities,
       }
 
+      vim.lsp.config.sourcekit = {
+        cmd = { "/Library/Developer/CommandLineTools/usr/bin/sourcekit-lsp" },
+        filetypes = { "swift" },
+        root_markers = { "Package.swift", ".git" },
+        capabilities=capabilities,
+      }
+
       vim.lsp.enable("pyright")
       vim.lsp.enable("ruff")
+      vim.lsp.enable("sourcekit")
+      vim.lsp.enable("lua_ls")
     end,
   },
 
@@ -326,6 +351,7 @@ require("lazy").setup({
       format_on_save = { timeout_ms = 500 },
       formatters_by_ft = {
         python = { "ruff_format" },
+        lua = { "stylua" },
       },
     },
   },
