@@ -34,6 +34,9 @@ alias rm='trash'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # git
+fpath=(~/.zsh/completions $fpath)
+zstyle ':completion:*' menu select
+setopt MENU_COMPLETE
 autoload -Uz compinit
 compinit
 
