@@ -40,17 +40,6 @@
         ]
       }
     ],
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "tee /tmp/claude-notification-payload.json | osascript -e 'display notification \"Claude needs your approval!\" with title \"Claude Code\"'"
-          }
-        ]
-      }
-    ],
     "PermissionRequest": [
       {
         "hooks": [

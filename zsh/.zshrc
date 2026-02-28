@@ -45,3 +45,21 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z} m:{A-Z}={a-z}'
 
 # Powerlevel10k config
 [[ ! -f ~/.config/powerlevel10k/p10k.zsh ]] || source ~/.config/powerlevel10k/p10k.zsh
+
+# BEGIN organic_analysis command-path hook
+function _organic_analysis_chpwd() {
+  case $PWD in
+    /Users/kasparavicius/repos/organic_analysis|/Users/kasparavicius/repos/organic_analysis/*)
+      zstyle ':completion:*' command-path '/Users/kasparavicius/.zsh/organic_analysis_bin'
+      zstyle ':completion:*:-command-:*' tag-order 'commands'
+      ;;
+    *)
+      zstyle -d ':completion:*' command-path
+      zstyle -d ':completion:*:-command-:*' tag-order
+      ;;
+  esac
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd _organic_analysis_chpwd
+_organic_analysis_chpwd
+# END organic_analysis command-path hook
