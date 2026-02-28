@@ -46,6 +46,7 @@ link_file "$DOTFILES_DIR/zsh/.zprofile" "$HOME/.zprofile"
 # Link Claude config
 mkdir -p "$HOME/.claude"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+link_file "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
 
 # Link MCP config
 link_file "$DOTFILES_DIR/mcp/.mcp.json" "$HOME/.mcp.json"

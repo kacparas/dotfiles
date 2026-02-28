@@ -3,8 +3,73 @@
     "allow": [
       "Read",
       "WebFetch",
-      "WebSearch"
+      "WebSearch",
+      "Bash(find:*)",
+      "Bash"
+    ],
+    "defaultMode": "default"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$HOME/.claude/hooks/gsd-check-update.js\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/kasparavicius/.claude/hooks/gsd-context-monitor.js\""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -c \"\nimport json, sys, subprocess\ndata = json.load(sys.stdin)\nmsg = data.get('last_assistant_message', 'Claude needs attention!')\nmsg = msg[:100] + '...' if len(msg) > 100 else msg\nsubprocess.run(['osascript', '-e', f'display notification {json.dumps(msg)} with title \\\"Claude Code\\\"'])\n\""
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tee /tmp/claude-notification-payload.json | osascript -e 'display notification \"Claude needs your approval!\" with title \"Claude Code\"'"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -c \"\nimport json, sys, subprocess\ndata = json.load(sys.stdin)\ntool = data.get('tool_name', 'a tool')\nsubprocess.run(['osascript', '-e', f'display notification {json.dumps(\\\"Waiting for your approval: \\\" + tool)} with title \\\"Claude Code\\\"'])\n\""
+          }
+        ]
+      }
     ]
   },
-  "alwaysThinkingEnabled": false
+  "statusLine": {
+    "type": "command",
+    "command": "node \"$HOME/.claude/hooks/gsd-statusline.js\""
+  },
+  "enabledPlugins": {
+    "pyright-lsp@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "medium"
 }
