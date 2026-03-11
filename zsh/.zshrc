@@ -63,3 +63,25 @@ autoload -Uz add-zsh-hook
 add-zsh-hook chpwd _organic_analysis_chpwd
 _organic_analysis_chpwd
 # END organic_analysis command-path hook
+
+# BEGIN organic_analysis sort-false
+zstyle ':completion:*:*:gene-boxplot:*:*' sort false
+zstyle ':completion:*:*:gene-dotplot:*:*' sort false
+zstyle ':completion:*:*:pathway-dot:*:*' sort false
+zstyle ':completion:*:*:pathway-bar:*:*' sort false
+zstyle ':completion:*:*:pathway-multiKO:*:*' sort false
+zstyle ':completion:*:*:tf-enrichment:*:*' sort false
+zstyle ':completion:*:*:sc-heatmap:*:*' sort false
+zstyle ':completion:*:*:sc-umap:*:*' sort false
+zstyle ':completion:*:*:network:*:*' sort false
+zstyle ':completion:*:*:hub-spoke:*:*' sort false
+zstyle ':completion:*:*:volcano:*:*' sort false
+zstyle ':completion:*:*:go-network:*:*' sort false
+zstyle ':completion:*:*:phospho-network:*:*' sort false
+zstyle ':completion:*:*:preprocess:*:*' sort false
+zstyle ':completion:*:*:assign-layers:*:*' sort false
+zstyle ':completion:*:*:run-de:*:*' sort false
+zstyle ':completion:*:*:enrich:*:*' sort false
+zstyle ':completion:*:*:prepare-de:*:*' sort false
+zstyle ':completion:*:*:install-completions:*:*' sort false
+# END organic_analysis sort-false

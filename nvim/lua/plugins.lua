@@ -322,6 +322,7 @@ require("lazy").setup({
 				python = { "ruff_format" },
 				lua = { "stylua" },
 				swift = { "swiftformat" },
+				markdown = { "prettier" },
 			},
 			formatters = {
 				swiftformat = {
@@ -331,6 +332,26 @@ require("lazy").setup({
 				},
 			},
 		},
+	},
+
+	-- Linter
+	{
+		"mfussenegger/nvim-lint",
+		event = { "BufWritePost", "BufReadPost" },
+		config = function()
+			local lint = require("lint")
+			lint.linters_by_ft = {
+				markdown = { "markdownlint" },
+			}
+			lint.linters.markdownlint = vim.tbl_deep_extend("force", lint.linters.markdownlint, {
+				args = { "--config", vim.fn.expand("~/.markdownlint.json"), "--stdin" },
+			})
+			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+				callback = function()
+					lint.try_lint()
+				end,
+			})
+		end,
 	},
 
 	-- Venv selector for Python

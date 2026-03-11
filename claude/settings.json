@@ -7,29 +7,9 @@
       "Bash(find:*)",
       "Bash"
     ],
-    "defaultMode": "default"
+    "defaultMode": "plan"
   },
   "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"$HOME/.claude/hooks/gsd-check-update.js\""
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"/Users/kasparavicius/.claude/hooks/gsd-context-monitor.js\""
-          }
-        ]
-      }
-    ],
     "Stop": [
       {
         "hooks": [
@@ -51,11 +31,7 @@
       }
     ]
   },
-  "statusLine": {
-    "type": "command",
-    "command": "node \"$HOME/.claude/hooks/gsd-statusline.js\""
-  },
-  "enabledPlugins": {
+"enabledPlugins": {
     "pyright-lsp@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true
   },
