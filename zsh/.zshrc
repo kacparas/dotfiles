@@ -78,10 +78,13 @@ zstyle ':completion:*:*:hub-spoke:*:*' sort false
 zstyle ':completion:*:*:volcano:*:*' sort false
 zstyle ':completion:*:*:go-network:*:*' sort false
 zstyle ':completion:*:*:phospho-network:*:*' sort false
+zstyle ':completion:*:*:compute-umap:*:*' sort false
 zstyle ':completion:*:*:preprocess:*:*' sort false
 zstyle ':completion:*:*:assign-layers:*:*' sort false
 zstyle ':completion:*:*:run-de:*:*' sort false
 zstyle ':completion:*:*:enrich:*:*' sort false
 zstyle ':completion:*:*:prepare-de:*:*' sort false
+zstyle ':completion:*:*:prepare-bulk-rna:*:*' sort false
 zstyle ':completion:*:*:install-completions:*:*' sort false
+zstyle ':completion:*:*:organic-app:*:*' sort false
 # END organic_analysis sort-false

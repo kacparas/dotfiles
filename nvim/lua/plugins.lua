@@ -67,7 +67,19 @@ require("lazy").setup({
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "python", "lua", "markdown" },
+				ensure_installed = {
+					"python",
+					"lua",
+					"markdown",
+					"svelte",
+					"javascript",
+					"typescript",
+					"html",
+					"css",
+					"r",
+					"rnoweb",
+					"yaml",
+				},
 				highlight = { enable = true },
 				indent = { enable = true, disable = { "python" } },
 			})
@@ -85,7 +97,12 @@ require("lazy").setup({
 		},
 		build = ":COQdeps",
 		init = function()
-			vim.g.coq_settings = { auto_start = "shut-up" }
+			vim.g.coq_settings = {
+				auto_start = "shut-up",
+				keymap = { jump_to_mark = "<c-n>" },
+				limits = { idle_timeout = 150 },
+				completion = { always = true },
+			}
 		end,
 	},
 
@@ -154,10 +171,26 @@ require("lazy").setup({
 				capabilities = capabilities,
 			}
 
+			vim.lsp.config.svelte = {
+				cmd = { "svelteserver", "--stdio" },
+				filetypes = { "svelte" },
+				root_markers = { "svelte.config.js", "package.json", ".git" },
+				capabilities = capabilities,
+			}
+
+			vim.lsp.config.r_language_server = {
+				cmd = { "R", "--no-echo", "-e", "languageserver::run()" },
+				filetypes = { "r", "rmd" },
+				root_markers = { ".git", "DESCRIPTION", "renv.lock" },
+				capabilities = capabilities,
+			}
+
 			vim.lsp.enable("pyright")
 			vim.lsp.enable("ruff")
 			vim.lsp.enable("sourcekit")
 			vim.lsp.enable("lua_ls")
+			vim.lsp.enable("svelte")
+			vim.lsp.enable("r_language_server")
 		end,
 	},
 
@@ -174,8 +207,16 @@ require("lazy").setup({
 							command = { "ipython", "--no-autoindent" },
 							format = require("iron.fts.common").bracketed_paste,
 						},
+						rmd = {
+							command = { "radian" },
+							format = require("iron.fts.common").bracketed_paste,
+						},
+						r = {
+							command = { "radian" },
+							format = require("iron.fts.common").bracketed_paste,
+						},
 					},
-					repl_open_cmd = require("iron.view").split.vertical.botright(80),
+					repl_open_cmd = require("iron.view").split.horizontal.botright(15),
 				},
 				keymaps = {
 					send_motion = "<space>rc",
@@ -191,6 +232,20 @@ require("lazy").setup({
 		end,
 	},
 
+	{
+		"R-nvim/R.nvim",
+		ft = { "r", "rmd" },
+		config = function()
+			require("r").setup({
+				R_app = "radian",
+				R_args = {},
+				min_editor_width = 72,
+				rconsole_width = 0,
+				rconsole_height = 15,
+				objbr_opendf = true,
+			})
+		end,
+	},
 	-- Status line
 	{
 		"nvim-lualine/lualine.nvim",
@@ -217,8 +272,14 @@ require("lazy").setup({
 	{
 		"windwp/nvim-autopairs",
 		config = function()
-			require("nvim-autopairs").setup()
+			require("nvim-autopairs").setup({ map_cr = true })
 		end,
+	},
+
+	-- Auto close/rename HTML tags
+	{
+		"windwp/nvim-ts-autotag",
+		opts = {},
 	},
 
 	-- Comments

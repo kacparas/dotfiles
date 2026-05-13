@@ -31,10 +31,13 @@
       }
     ]
   },
-"enabledPlugins": {
+  "enabledPlugins": {
     "pyright-lsp@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "medium"
+  "effortLevel": "medium",
+  "editorMode": "vim",
+  "verbose": true,
+  "preferredNotifChannel": "iterm2"
 }

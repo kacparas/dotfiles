@@ -111,3 +111,24 @@ keymap("n", "<leader>ts", "<cmd>split | terminal<cr>", { desc = "Open terminal i
 -- Claude
 keymap("n", "<leader>tc", "<cmd>terminal claude<cr>", { desc = "Open Claude" })
 keymap("n", "<leader>tC", "<cmd>vsplit | terminal claude<cr>", { desc = "Open Claude in vsplit" })
+
+-- Autopairs + coq CR integration (set on first InsertEnter, after coq initializes)
+vim.api.nvim_create_autocmd("InsertEnter", {
+	once = true,
+	callback = function()
+		local ok, npairs = pcall(require, "nvim-autopairs")
+		if not ok then return end
+		vim.keymap.set("i", "<CR>", function()
+			if vim.fn.pumvisible() ~= 0 then
+				local selected = vim.fn.complete_info({ "selected" }).selected
+				if selected == -1 then
+					vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-E><CR>", true, false, true), "n")
+				else
+					vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-Y>", true, false, true), "n")
+				end
+			else
+				vim.fn.feedkeys(npairs.autopairs_cr(), "n")
+			end
+		end, { noremap = true })
+	end,
+})
